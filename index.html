@@ -195,9 +195,9 @@
         </div>
         <img src="static/images/loc_schema_rev2.jpg" alt="MY ALT TEXT"
           style="width: 70%; display: block; margin: 0 auto;" />
-        <h2 class="subtitle has-text-centered">
+        <h3 class="subtitle has-text-centered">
           <strong>Overview of the localization approaches.</strong>
-        </h2>
+        </h3>
       </div>
     </div>
   </div>
@@ -220,13 +220,35 @@
           <!-- <strong>Localized attention layers responsible for the content of the generated text.</strong> We identify three layers in SDXL (55, 56, and 57), one layer in DeepFloyd IF (17), and one layer in SD3 (10). -->
         </h2>
         <img src="static/images/tab.png" alt="MY ALT TEXT" style="width: 50%; display: block; margin: 0 auto;"/>
-        <h2 class="subtitle has-text-centered">
+        <h3 class="subtitle has-text-centered">
           <strong>Localized attention layers responsible for the content of the generated text.</strong>
-        </h2>
+        </h3>
       </div>
     </div>
   </div>
 </section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Localized layers only care about text part of the prompt</h2>
+      <div class="column is-full">
+        <div class="content has-text-justified">
+          <p>
+          We investigate the information extracted from the prompt by selected layers and its effect on generation. To this end,
+          we use different combinations of templates and keyword texts as the target prompt
+          and measure their impact on the diffusion model’s output. We find that the background consistently aligns with the
+          source prompt, while text alignment varies based on the target prompt. This suggests that the localized layers focus
+          specifically on the text component of the prompt.
+          </p>
+          <img src="static/images/fig4.png" alt="Figure showing localized layers focusing on text" style="width: 40%; display: block; margin: 0 auto;"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
 <section class="hero is-small">
   <div class="hero-body">
@@ -241,17 +263,20 @@
             diversity of outputs produced by the diffusion models. By focusing on localized layers, we only need to fine-tune about
             1% of the model parameters, making our approach both computationally and memory-efficient.
           <div style="margin: 20px 0;">
-            <div style="width: 70%; margin: 0 auto 30px auto;">
-              <img src="static/images/clip_embs.jpg" alt="MY ALT TEXT" style="width: 100%; display: block;"/>
-              <h2 class="subtitle has-text-centered">
-                <strong>First image caption</strong>
-              </h2>
+            <div style="display: flex; justify-content: space-between; margin: 0 auto 30px auto; width: 90%;">
+              <div style="width: 53%;">
+                <img src="static/images/lora3.jpg" alt="MY ALT TEXT" style="width: 100%; display: block;"/>
+              </div>
+              <div style="width: 45%;">
+                <img src="static/images/clip_embs.jpg" alt="MY ALT TEXT" style="width: 100%; display: block;"/>
+              </div>
             </div>
-            <div style="width: 70%; margin: 0 auto;">
+            <div style="width: 50%; margin: 0 auto;">
               <img src="static/images/lora_generations5.jpg" alt="MY ALT TEXT" style="width: 100%; display: block;"/>
-              <h2 class="subtitle has-text-centered">
-                <strong>Second image caption</strong>
-              </h2>
+              <h4 class="subtitle has-text-centered">
+                <strong>Fine-tuning only localized layers results in a model that generates images with higher quality and
+                  diversity.</strong>
+              </h4>
             </div>
           </div>
 
@@ -259,12 +284,57 @@
           <p>
             <strong>Textual editing</strong>
             We demonstrate how we can use the localized layers to edit textual content in generated
-            images.
+            images, where the goal is to change the text in the generated image to a new text, while keeping the rest of the image unchanged.
           </p>
+          <div class="container">
+            <div id="results-carousel" class="carousel results-carousel">
+              <div class="item">
+                <!-- Your image here -->
+                <img src="static/images/gen_sdxl.jpg" alt="MY ALT TEXT" />
+                <h2 class="subtitle has-text-centered">
+                  SDXL
+                </h2>
+              </div>
+              <div class="item">
+                <!-- Your image here -->
+                <img src="static/images/gen_if.jpg" alt="MY ALT TEXT" />
+                <h2 class="subtitle has-text-centered">
+                  DeepFloyd IF
+                </h2>
+              </div>
+              <div class="item">
+                <!-- Your image here -->
+                <img src="static/images/gen_sd3.jpg" alt="MY ALT TEXT" />
+                <h2 class="subtitle has-text-centered">
+                  SD3
+                </h2>
+              </div>
+          </div>
+          Our approach can be directly compared with the Prompt-to-Prompt method where the image edition is controlled only by the
+          text provided by the user.
+          <div style="width: 70%; margin: 0 auto;">
+            <img src="static/images/tab_edit.png" alt="MY ALT TEXT" style="width: 100%; display: block;"/>
+            <h4 class="subtitle has-text-centered">
+              Our method outperforms Prompt-to-Prompt method in text editing task by generating higher-quality images while preserving the rest of the visual content.
+            </h4>
+          </div>
           <p>
             <strong>Preventing toxic text generation</strong>
-            We extend this idea to the practical use case of preventing the generation of toxic text in a cost-free
-            manner.
+              We observe that diffusion models, even the ones equipped with safeguards against generating NSFW (Not Safe For Work)
+              content, tend to simply copy-paste the text from the prompt to the image. As a result, while the visual content may be
+              safe thanks to careful filtering of the fine-tuning dataset, the text in the generated images can still be harmful.
+              We apply our edition technique to prevent the generation of toxic text within images. Our goal is to address scenarios where a model provider exposes a diffusion model for generating images from textual
+              prompts.
+          </p>
+          <div style="width: 70%; margin: 0 auto;">
+            <img src="static/images/gen_toxic.png" alt="MY ALT TEXT" style="width: 100%; display: block;"/>
+          </div>
+          <div style="width: 50%; margin: 0 auto;">
+            <img src="static/images/tab_toxic.png" alt="MY ALT TEXT" style="width: 100%; display: block;"/>
+          </div>
+          <p>
+            With our approach, we remove the toxic text from the final generations. Importantly, we achieve this result with a single pass through the diffusion denoising process without imposing any additional
+            computational cost.
           </p>
         </div>
       </div>
