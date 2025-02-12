@@ -54,6 +54,9 @@
           <div class="column has-text-centered">
             <h1 class="title is-1 publication-title">Precise Parameter Localization for Textual Generation in Diffusion Models</h1>
             <div class="is-size-5 publication-authors">
+              <span class="author-block"><strong>ICLR 2025</strong></span>
+            </div>
+            <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
                 <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Łukasz Staniszewski</a><sup>*1</sup>,</span>
@@ -71,15 +74,15 @@
               </div>
 
               <div class="is-size-5 publication-authors">
-                <span class="author-block"><sup>1</sup>Warsaw University of Technology,<br> <sup>2</sup>CISPA Helmholtz Center for
-                  Information Security,<br> <sup>3</sup>IDEAS NCBR<br> ICLR 2025</span>
-                <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+                <span class="author-block"><sup>1</sup>Warsaw University of Technology<br> <sup>2</sup>CISPA Helmholtz Center for
+                  Information Security<br> <sup>3</sup>IDEAS NCBR</span>
+                <span class="eql-cntrb"><small><br><sup>*</sup>Indicates <strong>Equal Contribution</strong>.</small></span>
               </div>
 
                   <div class="column has-text-centered">
                     <div class="publication-links">
                          <!-- Arxiv PDF link -->
-                      <!-- <span class="link-block">
+                      <span class="link-block">
                         <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
                         class="external-link button is-normal is-rounded is-dark">
                         <span class="icon">
@@ -87,7 +90,7 @@
                         </span>
                         <span>Paper</span>
                       </a>
-                    </span> -->
+                    </span>
 
                     <!-- Supplementary PDF link -->
                     <!-- <span class="link-block">
@@ -102,12 +105,12 @@
 
                   <!-- Github link -->
                   <span class="link-block">
-                    <a href="https://github.com/luk-st/t2i-text-localization" target="_blank"
+                    <a href="#" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
-                    <span>Code</span>
+                    <span>Code (comming soon!)</span>
                   </a>
                 </span>
 
@@ -130,20 +133,17 @@
 </section>
 
 
-<!-- Teaser video-->
-<!-- <section class="hero teaser">
+<!-- Teaser video -->
+<section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <video poster="" id="tree" autoplay controls muted loop height="100%">
-        <source src="static/videos/banner_video.mp4"
-        type="video/mp4">
-      </video>
+      <img src="static/videos/teaser.gif" alt="Teaser video" style="width: 100%; height: auto;">
       <h2 class="subtitle has-text-centered">
-        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus.
+        <strong>tldr;</strong> Textual content within images is controlled by less than 1% of diffusion models’ parameters, which we localize by activation patching.
       </h2>
     </div>
   </div>
-</section> -->
+</section>
 <!-- End teaser video -->
 
 <!-- Paper abstract -->
@@ -176,8 +176,8 @@
 </section>
 <!-- End paper abstract -->
 
-<section class="hero is-small">
-  <div class="hero-body">
+<section class="hero is-small" style="margin-bottom: 0px;">
+  <div class="hero-body" style="margin-bottom: 0px;">
     <div class="container">
       <h2 class="title is-3 has-text-centered">Where do diffusion models generate the content of text?</h2>
       <div class="column is-full">
@@ -193,10 +193,10 @@
             activations from a target prompt during another generation. By modifying only text-related activations, patching
             remains effective across different model architectures.</p>
         </div>
-        <img src="static/images/loc_schema_rev2.jpg" alt="MY ALT TEXT"
-          style="width: 70%; display: block; margin: 0 auto;" />
+        <img src="static/images/img_schema.svg" alt="MY ALT TEXT"
+          style="width: 75%; display: block; margin: 0 auto;" />
         <h3 class="subtitle has-text-centered">
-          <strong>Overview of the localization approaches.</strong>
+          Overview of the localization approaches.
         </h3>
       </div>
     </div>
@@ -215,13 +215,10 @@
             Most notably, <strong>this constitutes to less than 1% of the total model parameters</strong>.
           </p>
         </div>
+        <img src="static/images/tab.png" alt="MY ALT TEXT" style="width: 50%; display: block; margin: 0 auto 15px;"/>
         <img src="static/images/loc_heatmap.jpg" alt="MY ALT TEXT" style="width: 80%; display: block; margin: 0 auto;"/>
-        <h2 class="subtitle has-text-centered">
-          <!-- <strong>Localized attention layers responsible for the content of the generated text.</strong> We identify three layers in SDXL (55, 56, and 57), one layer in DeepFloyd IF (17), and one layer in SD3 (10). -->
-        </h2>
-        <img src="static/images/tab.png" alt="MY ALT TEXT" style="width: 50%; display: block; margin: 0 auto;"/>
         <h3 class="subtitle has-text-centered">
-          <strong>Localized attention layers responsible for the content of the generated text.</strong>
+          Localized attention layers responsible for the content of the generated text.
         </h3>
       </div>
     </div>
@@ -231,18 +228,17 @@
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3 has-text-centered">Localized layers only care about text part of the prompt</h2>
+      <h2 class="title is-3 has-text-centered">Localized layers separate textual content from the rest of the image</h2>
       <div class="column is-full">
         <div class="content has-text-justified">
           <p>
-          We investigate the information extracted from the prompt by selected layers and its effect on generation. To this end,
-          we use different combinations of templates and keyword texts as the target prompt
-          and measure their impact on the diffusion model’s output. We find that the background consistently aligns with the
-          source prompt, while text alignment varies based on the target prompt. This suggests that the localized layers focus
-          specifically on the text component of the prompt.
+            We investigate the information extracted from the prompt by selected layers and its effect on generation. To this end, we use different combinations of templates and keyword texts as the target prompt and measure their impact on the diffusion model’s output. We find that the background consistently aligns with the source prompt, while text alignment varies based on the target prompt. This suggests that the localized layers focus specifically on the text component of the prompt.
           </p>
           <img src="static/images/fig4.png" alt="Figure showing localized layers focusing on text" style="width: 40%; display: block; margin: 0 auto;"/>
         </div>
+        <h3 class="subtitle has-text-centered">
+          Localized layers focus on the text component of the prompt.
+        </h3>
       </div>
     </div>
   </div>
@@ -262,25 +258,25 @@
             text-generation abilities of diffusion models. This enhancement is achieved without compromising the quality and
             diversity of outputs produced by the diffusion models. By focusing on localized layers, we only need to fine-tune about
             1% of the model parameters, making our approach both computationally and memory-efficient.
-          <div style="margin: 20px 0;">
-            <div style="display: flex; justify-content: space-between; margin: 0 auto 30px auto; width: 90%;">
-              <div style="width: 53%;">
+          </p>
+          <div style="margin: 20px 0; display: flex; justify-content: center;">
+            <div style="width: 43%;">
+              <div style="width: 100%; margin-bottom: 20px;">
                 <img src="static/images/lora3.jpg" alt="MY ALT TEXT" style="width: 100%; display: block;"/>
               </div>
-              <div style="width: 45%;">
+              <div style="width: 100%;">
                 <img src="static/images/clip_embs.jpg" alt="MY ALT TEXT" style="width: 100%; display: block;"/>
               </div>
             </div>
-            <div style="width: 50%; margin: 0 auto;">
+            <div style="width: 50%;">
               <img src="static/images/lora_generations5.jpg" alt="MY ALT TEXT" style="width: 100%; display: block;"/>
-              <h4 class="subtitle has-text-centered">
-                <strong>Fine-tuning only localized layers results in a model that generates images with higher quality and
-                  diversity.</strong>
-              </h4>
             </div>
           </div>
-
-          </p>
+        </div>
+        <h3 class="subtitle has-text-centered">
+          Fine-tuning only localized layers results in a model that generates images with higher quality and diversity.
+        </h3>
+        <div class="content has-text-justified">
           <p>
             <strong>Textual editing</strong>
             We demonstrate how we can use the localized layers to edit textual content in generated
@@ -309,15 +305,17 @@
                   SD3
                 </h2>
               </div>
+            </div>
           </div>
-          Our approach can be directly compared with the Prompt-to-Prompt method where the image edition is controlled only by the
-          text provided by the user.
+          Our approach can be directly compared with the Prompt-to-Prompt method where the image edition is controlled only by the text provided by the user.
           <div style="width: 70%; margin: 0 auto;">
             <img src="static/images/tab_edit.png" alt="MY ALT TEXT" style="width: 100%; display: block;"/>
-            <h4 class="subtitle has-text-centered">
-              Our method outperforms Prompt-to-Prompt method in text editing task by generating higher-quality images while preserving the rest of the visual content.
-            </h4>
           </div>
+        </div>
+        <h4 class="subtitle has-text-centered">
+          Our method outperforms Prompt-to-Prompt method in text editing task by generating higher-quality images while preserving the rest of the visual content.
+        </h4>
+        <div class="content has-text-justified">
           <p>
             <strong>Preventing toxic text generation</strong>
               We observe that diffusion models, even the ones equipped with safeguards against generating NSFW (Not Safe For Work)
@@ -326,17 +324,16 @@
               We apply our edition technique to prevent the generation of toxic text within images. Our goal is to address scenarios where a model provider exposes a diffusion model for generating images from textual
               prompts.
           </p>
-          <div style="width: 70%; margin: 0 auto;">
-            <img src="static/images/gen_toxic.png" alt="MY ALT TEXT" style="width: 100%; display: block;"/>
-          </div>
           <div style="width: 50%; margin: 0 auto;">
             <img src="static/images/tab_toxic.png" alt="MY ALT TEXT" style="width: 100%; display: block;"/>
           </div>
-          <p>
-            With our approach, we remove the toxic text from the final generations. Importantly, we achieve this result with a single pass through the diffusion denoising process without imposing any additional
-            computational cost.
-          </p>
+          <div style="width: 70%; margin: 0 auto;">
+            <img src="static/images/gen_toxic.png" alt="MY ALT TEXT" style="width: 100%; display: block;"/>
+          </div>
         </div>
+        <h4 class="subtitle has-text-centered">
+          We remove the toxic text from the final generations with a single pass through the diffusion denoising process without imposing any additional computational cost.
+        </h4>
       </div>
     </div>
   </div>
@@ -455,7 +452,16 @@
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
-      <pre><code>BibTex Code Here</code></pre>
+      <pre><code>
+@inproceedings{
+  staniszewski2025precise,
+  title={Precise Parameter Localization for Textual Generation in Diffusion Models},
+  author={{\L}ukasz Staniszewski and Bartosz Cywi{\'n}ski and Franziska Boenisch and Kamil Deja and Adam Dziedzic},
+  booktitle={The Thirteenth International Conference on Learning Representations},
+  year={2025},
+  url={https://openreview.net/forum?id=gdHtZlaaSo}
+}
+  </code></pre>
     </div>
 </section>
 <!--End BibTex citation -->
@@ -468,8 +474,10 @@
         <div class="content">
 
           <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            This page was built using <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from <a href="https://nerfies.github.io" target="_blank">Nerfies</a>. 
+
+            <br>
+            This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
             Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
 
