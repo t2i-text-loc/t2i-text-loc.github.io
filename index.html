@@ -103,6 +103,15 @@
                       <span>Supplementary</span>
                     </a>
                   </span> -->
+                  <span class="link-block">
+                    <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
 
                   <!-- Github link -->
                   <span class="link-block">
@@ -116,15 +125,6 @@
                 </span>
 
                 <!-- ArXiv abstract Link -->
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
 
               <span class="link-block">
                 <a href="#BibTeX"
@@ -149,7 +149,11 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img src="static/videos/teaser2.gif" alt="Teaser video" style="width: 100%; height: auto;">
+      <video poster="" id="tree" autoplay="" controls="" muted="" loop="" height="100%">
+        <!-- Your video here -->
+        <source src="static/videos/teaser.mp4" type="video/mp4">
+      </video>
+      <!-- <img src="static/videos/teaser2.gif" alt="Teaser video" style="width: 100%; height: auto;"> -->
       <h2 class="subtitle has-text-centered">
         <strong>tldr;</strong> Textual content within images is controlled by less than 1% of diffusion models’ parameters, which we localize by activation patching.
       </h2>
@@ -211,15 +215,6 @@
           Overview of the localization approaches.
         </h3>
       </div>
-    </div>
-  </div>
-</section>
-
-
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3 has-text-centered"></h2>
       <div class="column is-full">
         <div class="content has-text-justified">
           <p>
@@ -228,7 +223,7 @@
           </p>
         </div>
         <img src="static/images/tab.png" alt="MY ALT TEXT" style="width: 50%; display: block; margin: 0 auto 15px;"/>
-        <img src="static/images/loc_heatmap.jpg" alt="MY ALT TEXT" style="width: 80%; display: block; margin: 0 auto;"/>
+        <img src="static/images/loc_heatmap.jpg" alt="MY ALT TEXT" style="width: 70%; display: block; margin: 0 auto;"/>
         <h3 class="subtitle has-text-centered">
           Localized attention layers responsible for the content of the generated text.
         </h3>
@@ -264,8 +259,8 @@
       <h2 class="title is-3 has-text-centered">How can we benefit from localized layers?</h2>
       <div class="column is-full">
         <div class="content has-text-justified">
+          <h3 class="subtitle has-text-centered">I. Efficient fine-tuning</h3>
           <p>
-            <strong>Efficient fine-tuning</strong>
             We demonstrate that using LoRA-based fine-tuning specifically on the localized layers significantly improves the general
             text-generation abilities of diffusion models. This enhancement is achieved without compromising the quality and
             diversity of outputs produced by the diffusion models. By focusing on localized layers, we only need to fine-tune about
@@ -289,30 +284,30 @@
           Fine-tuning only localized layers results in a model that generates images with higher quality and diversity.
         </h3>
         <div class="content has-text-justified">
+          <h3 class="subtitle has-text-centered">II. Textual editing</h3>
           <p>
-            <strong>Textual editing</strong>
-            We demonstrate how we can use the localized layers to edit textual content in generated
-            images, where the goal is to change the text in the generated image to a new text, while keeping the rest of the image unchanged.
+            We can use the localized layers to edit textual content in generated
+            images, where the goal is to change the text in the generated image to a new text, while keeping the rest of the image unchanged. Our method works across diverse model archtectures, leveraging different text encoders.
           </p>
-          <div class="container">
+          <div class="container" style="display: flex; justify-content: center;">
             <div id="results-carousel" class="carousel results-carousel">
               <div class="item">
                 <!-- Your image here -->
-                <img src="static/images/gen_sdxl.jpg" alt="MY ALT TEXT" />
+                <img src="static/images/sdxl.png" alt="MY ALT TEXT" />
                 <h2 class="subtitle has-text-centered">
                   SDXL
                 </h2>
               </div>
               <div class="item">
                 <!-- Your image here -->
-                <img src="static/images/gen_if.jpg" alt="MY ALT TEXT" />
+                <img src="static/images/if.png" alt="MY ALT TEXT" />
                 <h2 class="subtitle has-text-centered">
                   DeepFloyd IF
                 </h2>
               </div>
               <div class="item">
                 <!-- Your image here -->
-                <img src="static/images/gen_sd3.jpg" alt="MY ALT TEXT" />
+                <img src="static/images/sd3.png" alt="MY ALT TEXT" />
                 <h2 class="subtitle has-text-centered">
                   SD3
                 </h2>
@@ -328,25 +323,25 @@
           Our method outperforms Prompt-to-Prompt method in text editing task by generating higher-quality images while preserving the rest of the visual content.
         </h4>
         <div class="content has-text-justified">
+          <h3 class="subtitle has-text-centered">III. Preventing toxic text generation</h3>
           <p>
-            <strong>Preventing toxic text generation</strong>
-              We observe that diffusion models, even the ones equipped with safeguards against generating NSFW (Not Safe For Work)
-              content, tend to simply copy-paste the text from the prompt to the image. As a result, while the visual content may be
-              safe thanks to careful filtering of the fine-tuning dataset, the text in the generated images can still be harmful.
-              We apply our edition technique to prevent the generation of toxic text within images. Our goal is to address scenarios where a model provider exposes a diffusion model for generating images from textual
-              prompts.
+            We observe that diffusion models, even the ones equipped with safeguards against generating NSFW (Not Safe For Work) content, tend to simply copy-paste the text from the prompt to the image. As a result, while the visual content may be safe thanks to careful filtering of the fine-tuning dataset, the text in the generated images can still be harmful.
           </p>
-          <div style="width: 50%; margin: 0 auto;">
-            <img src="static/images/tab_toxic.png" alt="MY ALT TEXT" style="width: 100%; display: block;"/>
-          </div>
-          <div style="width: 70%; margin: 0 auto;">
-            <img src="static/images/gen_toxic.png" alt="MY ALT TEXT" style="width: 100%; display: block;"/>
-          </div>
+          <p>
+            We apply our edition technique to prevent the generation of toxic text within images. Our goal is to address scenarios where a model provider exposes a diffusion model for generating images from textual prompts.
+          </p>
+          <div class="image-container">
+            <!-- <div style="width: 49%; margin: 0 auto;"> -->
+              <img src="static/images/tab_toxic.png" alt="MY ALT TEXT"/>
+            <!-- </div> -->
+            <!-- <div style="width: 49%; margin: 0 auto;"> -->
+              <img src="static/images/gen_toxic2.png" alt="MY ALT TEXT"/>
+            <!-- </div> -->
         </div>
-        <h4 class="subtitle has-text-centered">
-          We remove the toxic text from the final generations with a single pass through the diffusion denoising process without imposing any additional computational cost.
-        </h4>
       </div>
+      <h4 class="subtitle has-text-centered">
+        We remove the toxic text from the final generations with a single pass through the diffusion denoising process without imposing any additional computational cost.
+      </h4>
     </div>
   </div>
 </section>

@@ -112,6 +112,8 @@ body {
 
 .results-carousel {
   overflow: hidden;
+  width: 80%;
+  margin-bottom: 1em;
 }
 
 .results-carousel .item {
@@ -133,5 +135,32 @@ body {
   font-size: smaller;
 }
 
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
+.image-container img {
+  margin: 0 auto;
+  display: block;
+}
 
+.image-container img:nth-child(1) {
+  width: 35%
+}
+
+.image-container img:nth-child(2) {
+  width: 49%;
+}
+
+@media (max-width: 1000px) {
+  .image-container img:nth-child(1) {
+    width: 60%;
+    margin-bottom: 1em;
+  }
+
+  .image-container img:nth-child(2) {
+    width: 70%;
+  }
+}
